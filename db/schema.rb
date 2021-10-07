@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_23_115803) do
+ActiveRecord::Schema.define(version: 2021_09_11_020526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,19 @@ ActiveRecord::Schema.define(version: 2021_08_23_115803) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "roles_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "role_id", null: false
+    t.index ["role_id", "user_id"], name: "index_roles_users_on_role_id_and_user_id"
+    t.index ["user_id", "role_id"], name: "index_roles_users_on_user_id_and_role_id"
+  end
+
   create_table "sheep", force: :cascade do |t|
     t.string "body"
     t.datetime "created_at", precision: 6, null: false
@@ -59,6 +72,17 @@ ActiveRecord::Schema.define(version: 2021_08_23_115803) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "user_roles", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "role_id", null: false
+    t.string "assigned_by"
+    t.string "location"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["role_id"], name: "index_user_roles_on_role_id"
+    t.index ["user_id"], name: "index_user_roles_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -69,4 +93,6 @@ ActiveRecord::Schema.define(version: 2021_08_23_115803) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "user_roles", "roles"
+  add_foreign_key "user_roles", "users"
 end

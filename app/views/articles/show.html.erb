@@ -1,1 +1,6 @@
-<%= render @article %>
+<% if @article.present? %>
+	<%= render @article %>
+<% else %>
+	<%= flash[:alert] %>
+<% end %>
+

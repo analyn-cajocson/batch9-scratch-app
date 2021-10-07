@@ -1,11 +1,18 @@
 class ArticlesController < ApplicationController
 
-  def index #index.html.erb
+  def index
     @articles = Article.all
+    @article = Article.new
   end
 
   def show
-    @article = Article.find(params[:id])
+    begin
+      @article = Article.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      puts "ERROR #{e}"
+      flash[:alert] = "Article not found."
+      render :show
+    end
   end
 
   def find_name
@@ -13,16 +20,19 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @hey = Article.new
+    @article = Article.new
   end
 
   def create
+    @articles = Article.all
     @article = Article.new(article_params)
 
-    if @article.save
-      redirect_to articles_path
-    else
-      render :new
+    respond_to do |format|
+      if @article.save
+        format.js
+      else
+        format.html { render :index }
+      end
     end
     
   end

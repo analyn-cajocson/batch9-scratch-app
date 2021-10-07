@@ -1,11 +1,8 @@
-<div>
-  ID: <%= article.id %>
-</div>
-
-<div>
-  Name: <%= article.name %>
-</div>
-
-<div>
-  Body: <%= article.body %>
-</div>
+<tr>
+  <td><%= article.id %></td>
+  <td><%= article.name %></td>
+  <td><%= article.body %></td>
+  <td><%= link_to 'Show', article %></td>
+  <td><%= link_to 'Edit', edit_article_path(article) %></td>
+  <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>

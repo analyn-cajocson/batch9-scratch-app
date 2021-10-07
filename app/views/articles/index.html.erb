@@ -1,3 +1,9 @@
+<div data-controller="article-form">
+  <%= render "form", article: @article %>
+</div>
+
+<h1>All Articles</h1>
+
 <table>
   <thead>
     <tr>
@@ -7,14 +13,7 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @articles.each do |article| %>
-      <tr>
-        <td><%= article.id %></td>
-        <td><%= article.name %></td>
-        <td><%= article.body %></td>
-      </tr>
-
-    <% end %>
+  <tbody id='articles'>
+    <%= render @articles %>
   </tbody>
 </table>

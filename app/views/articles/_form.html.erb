@@ -1,9 +1,9 @@
-<%= form_with scope: :article, model: @article, locale: true do |f| %>
+<%= form_with model: article, local: false do |f| %>
   
   <div>
-    <% if @article.errors.any? %>
-      <ul>
-        <% @article.errors.full_messages.each do |message| %>
+    <% if article.errors.any? %>
+      <ul id='article-errors'>
+        <% article.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -22,7 +22,7 @@
   </div>
 
   <div>
-    <%= f.submit %>
+    <%= f.submit :Save %>
   </div>
 
 <% end %>
