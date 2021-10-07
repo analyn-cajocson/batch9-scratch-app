@@ -29,7 +29,7 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
-        format.js
+        format.js {render layout: false}
       else
         format.html { render :index }
       end

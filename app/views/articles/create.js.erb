@@ -1,7 +1,7 @@
-var articles = document.getElementById("articles");
-articles.innerHTML = "<%= j render @article %>" + articles.innerHTML;
 
-console.log(articles);
+
+var articles = document.getElementById("articles");
+articles.innerHTML = articles.innerHTML + "<%= j render @articles %>";
 
 var article_name = document.getElementById("article_name");
 article_name.value = '';
@@ -10,4 +10,4 @@ article_name.focus();
 var article_body = document.getElementById("article_body");
 article_body.value = '';
 
-document.getElementById("article-errors").remove();
+// document.getElementById("article-errors").remove();
